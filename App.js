@@ -48,7 +48,7 @@ export default function App() {
         //   console.log("Хоёрдахь бичлэгийн ID", r2.insertId);
         //   const result = await getPlaces();
         //   console.log("Үр дүн: ", result.rows._array);
-        //   await clearPlaces();
+        // await clearPlaces();
         // })();
         console.log("Базыг бэлтгэж дууслаа...");
       })
@@ -72,7 +72,11 @@ export default function App() {
         >
           <Stack.Screen name="Places" component={PlacesListScreen} />
           <Stack.Screen name="PlaceDetail" component={PlaceDetailScreen} />
-          <Stack.Screen name="NewPlace" component={NewPlaceScreen} />
+          <Stack.Screen
+            name="NewPlace"
+            component={NewPlaceScreen}
+            options={{ title: "Шинэ газар хадгалах" }}
+          />
           <Stack.Screen name="Map" component={MapScreen} />
         </Stack.Navigator>
       </NavigationContainer>

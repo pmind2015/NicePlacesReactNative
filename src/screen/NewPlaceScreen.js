@@ -16,9 +16,17 @@ const MapScreen = props => {
   const dispatch = useDispatch();
   const [place, setPlace] = React.useState("");
   const [selectedImage, setSelectedImage] = React.useState();
+  const [selectedLocation, setSelectedLocation] = React.useState();
+
+  React.useEffect(() => {
+    if (props.route.params) {
+      console.log("Газар сонгогдлоо: ", props.route.params);
+      setSelectedLocation(props.route.params.markerLocation);
+    }
+  }, [props.route]);
 
   const savePlace = () => {
-    dispatch(addPlace(place, selectedImage));
+    dispatch(addPlace(place, selectedImage, selectedLocation));
     props.navigation.goBack();
   };
 
@@ -45,7 +53,13 @@ const MapScreen = props => {
         setSelectedImage={setSelectedImage}
       />
 
-      <LocationPicker />
+      <LocationPicker
+        selectedLocation={selectedLocation}
+        setSelectedLocation={setSelectedLocation}
+        gotoMap={() => {
+          props.navigation.navigate("Map", { selectedLocation });
+        }}
+      />
 
       <View style={{ paddingHorizontal: 110 }}>
         <Button title="Хадгал" onPress={savePlace} />

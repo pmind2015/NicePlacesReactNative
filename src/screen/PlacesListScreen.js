@@ -35,7 +35,14 @@ export default ({ navigation }) => {
         <FlatList
           data={places}
           keyExtractor={item => item.id.toString()}
-          renderItem={data => <PlaceItem item={data.item} />}
+          renderItem={data => (
+            <PlaceItem
+              item={data.item}
+              onPress={() => {
+                navigation.navigate("PlaceDetail", { place: data.item });
+              }}
+            />
+          )}
         />
       )}
     </View>
